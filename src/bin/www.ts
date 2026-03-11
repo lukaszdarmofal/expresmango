@@ -1,37 +1,34 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
 
 import app from "../app";
 import debug from "debug"
 import http from "http";
+import connectDB from "../database";
+import dotenv from "dotenv";
 
-/**
- * Get port from environment and store in Express.
- */
+dotenv.config();
 
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
+
 
 var server = http.createServer(app);
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+const start = async () => {
+  try {
+    await connectDB();
+    server.listen(port);
+    server.on('error', onError);
+    server.on('listening', onListening);
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+  } catch (err) {
+    console.error("Error connecting: ", err);
+    process.exit(1);
+  }
+}
 
-/**
- * Normalize a port into a number, string, or false.
- */
+start()
+
 
 function normalizePort(val: string) {
   const port = parseInt(val, 10);
@@ -49,9 +46,6 @@ function normalizePort(val: string) {
   return false;
 }
 
-/**
- * Event listener for HTTP server "error" event.
- */
 
 function onError(error: NodeJS.ErrnoException) {
   if (error.syscall !== 'listen') {
@@ -77,9 +71,6 @@ function onError(error: NodeJS.ErrnoException) {
   }
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
 
 function onListening() {
   const addr = server.address();
@@ -88,3 +79,4 @@ function onListening() {
     : 'port ' + addr?.port;
   debug('Listening on ' + bind);
 }
+

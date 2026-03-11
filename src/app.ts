@@ -4,6 +4,8 @@ import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
 import connectDB from "./database";
+import taskroutes from "./routes/taskroutes";
+
 
 (async () => {
    try {
@@ -20,10 +22,14 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use("/tasks", taskroutes);
+
 app.get("/", (req, res) => {
-    res.json({message: "Api Express + ts OK!"})
+    res.json({message: "Hello!"})
 })
+
 
 export default app;

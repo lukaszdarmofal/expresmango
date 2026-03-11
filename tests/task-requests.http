@@ -1,0 +1,20 @@
+@baseUrl = http://localhost:5000
+
+### GET request example server
+GET {{baseUrl}}/
+Content-Type: application/json
+
+
+### GET tasks
+GET {{baseUrl}}/tasks
+Content-Type: application/json
+
+
+### POST a task
+POST {{baseUrl}}/tasks
+Content-Type: application/json
+
+{
+  "title": "Zadanie nowe!",
+  "description": "Tutaj jest treść zadania"
+}
