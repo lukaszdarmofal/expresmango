@@ -1,17 +1,10 @@
 import express, {request, response} from 'express';
 import TaskModel, {Task} from "../models/Task";
+import {getTasks} from "../controllers/task.controller";
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    try {
-        const tasks: Array<Task> = await TaskModel.find()
-        res.json(tasks)
-
-    } catch (e) {
-        res.status(500).json({error: e});
-    }
-})
+router.get('/', getTasks);
 
 router.post('/', async (req, res) => {
     try {
