@@ -15,6 +15,18 @@ POST {{baseUrl}}/tasks
 Content-Type: application/json
 
 {
-  "title": "Zadanie nowe!",
-  "description": "Tutaj jest treść zadania"
+  "title": "Zadania",
+  "description": "Stworzć wiecej zadań"
 }
+
+### Update a task (PUT)
+PUT {{baseUrl}}/tasks/69b11dd8ddd2c47f756b180b
+Content-Type: application/json
+
+{
+  "completed": true
+}
+
+### DELETE a task
+DELETE {{baseUrl}}/tasks/69b120601ecc590b9cece7fd
+Content-Type: application/json
